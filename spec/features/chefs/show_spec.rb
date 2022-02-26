@@ -11,12 +11,15 @@ RSpec.describe 'Chef Show Page' do
     @cheese = Ingredient.create!(name: 'Cheese', calories: 200)
     @lettuce = Ingredient.create!(name: 'Lettuce', calories: 5)
     @sauce = Ingredient.create!(name: 'Enchilida Sauce', calories: 50)
+    @carnitas = Ingredient.create!(name: 'Carnitas', calories: 300)
 
     @dish_ing_1 = DishIngredient.create!(dish_id: @tacos.id, ingredient_id: @tortilla.id )
     @dish_ing_2 = DishIngredient.create!(dish_id: @tacos.id, ingredient_id: @cheese.id )
     @dish_ing_3 = DishIngredient.create!(dish_id: @tacos.id, ingredient_id: @lettuce.id )
+    @dish_ing_3 = DishIngredient.create!(dish_id: @tacos.id, ingredient_id: @carnitas.id )
     @dish_ing_4 = DishIngredient.create!(dish_id: @enchiladas.id, ingredient_id: @tortilla.id )
     @dish_ing_5 = DishIngredient.create!(dish_id: @enchiladas.id, ingredient_id: @cheese.id )
+    @dish_ing_6 = DishIngredient.create!(dish_id: @enchiladas.id, ingredient_id: @carnitas.id )
     @dish_ing_6 = DishIngredient.create!(dish_id: @enchiladas.id, ingredient_id: @sauce.id )
   end
 
@@ -47,6 +50,23 @@ RSpec.describe 'Chef Show Page' do
         expect(page).to have_content(@cheese.name)
         expect(page).to have_content(@lettuce.name)
         expect(page).to have_content(@sauce.name)
+        expect(page).to have_content(@carnitas.name)
+      end
+    end
+  end
+
+  describe 'Extension' do
+    describe 'shows 3 most popular ingredients based on most used' do
+      it 'shows most popular ingredients' do
+        visit chef_path(@chef_laura)
+        expect(current_path).to eq(chef_path(@chef_laura))
+
+        within "div.popular" do
+          expect(page).to have_content("Most Popular Ingredients")
+          expect(page).to have_content(@tortilla.name)
+          expect(page).to have_content(@cheese.name)
+          expect(page).to have_content(@carnitas.name)
+        end
       end
     end
   end
