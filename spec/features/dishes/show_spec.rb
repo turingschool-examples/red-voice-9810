@@ -21,37 +21,52 @@ RSpec.describe 'Dish Show Page' do
     @dish_ing_6 = DishIngredient.create!(dish_id: @enchiladas.id, ingredient_id: @sauce.id )
   end
 
-  describe 'Story 1 -shows dish name, description, ingredients and chefs name' do
-    it 'shows dish name & description' do
-      visit dish_path(@tacos)
-      expect(current_path).to eq(dish_path(@tacos))
+  describe 'Story 1' do
+    describe 'shows dish name, description, ingredients and chefs name' do
+      it 'shows dish name & description' do
+        visit dish_path(@tacos)
+        expect(current_path).to eq(dish_path(@tacos))
 
-      within "div.dish" do
-        expect(page).to have_content(@tacos.name)
-        expect(page).to have_content(@tacos.description)
-        expect(page).to_not have_content(@enchiladas.name)
+        within "div.dish" do
+          expect(page).to have_content(@tacos.name)
+          expect(page).to have_content(@tacos.description)
+          expect(page).to_not have_content(@enchiladas.name)
+        end
+      end
+
+      it 'shows ingredient list' do
+        visit dish_path(@tacos)
+        expect(current_path).to eq(dish_path(@tacos))
+
+        within "div.ingredients" do
+          expect(page).to have_content(@tortilla.name)
+          expect(page).to have_content(@cheese.name)
+          expect(page).to have_content(@lettuce.name)
+          expect(page).to_not have_content(@sauce.name)
+        end
+      end
+
+      it 'shows chef name' do
+        visit dish_path(@tacos)
+        expect(current_path).to eq(dish_path(@tacos))
+
+        within "div.chef" do
+          expect(page).to have_content(@chef_greg.name)
+          expect(page).to_not have_content(@chef_laura.name)
+        end
       end
     end
+  end
 
-    it 'shows ingredient list' do
-      visit dish_path(@tacos)
-      expect(current_path).to eq(dish_path(@tacos))
+  describe 'Story 2' do
+    describe 'Dish show page shows total calories for that dish' do
+      it 'shows calorie count' do
+        visit dish_path(@tacos)
+        expect(current_path).to eq(dish_path(@tacos))
 
-      within "div.ingredients" do
-        expect(page).to have_content(@tortilla.name)
-        expect(page).to have_content(@cheese.name)
-        expect(page).to have_content(@lettuce.name)
-        expect(page).to_not have_content(@sauce.name)
-      end
-    end
-
-    it 'shows chef name' do
-      visit dish_path(@tacos)
-      expect(current_path).to eq(dish_path(@tacos))
-
-      within "div.chef" do
-        expect(page).to have_content(@chef_greg.name)
-        expect(page).to_not have_content(@chef_laura.name)
+        within "div.calories" do
+          expect(page).to have_content(@tacos.calorie_count)
+        end
       end
     end
   end
