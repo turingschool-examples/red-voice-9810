@@ -1,0 +1,6 @@
+<div class="ingredients">
+  <h3><%= @dish.name %> Ingredients </h3>
+  <% @dish.ingredients.each do |ingr| %>
+    <li><%= ingr.name %></li>
+  <% end %>
+</div>
