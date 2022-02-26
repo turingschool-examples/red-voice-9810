@@ -1,3 +1,6 @@
+#Reflection - will add later
+
+
 # Order Up
 
 Fork this repository and clone your newly created repository. At the end of the challenge, push your code to your repository and create a pull request to this repository.
@@ -43,18 +46,18 @@ Two migrations have been made for you. The one to many relationship has been set
 ## User Stories
 
 Order up is an app that tracks chefs, the dishes that they make, and the ingredients that are in those dishes. Chef's have many dishes. Dishes belong to a chef. Dishes have many Ingredients and Ingredients have many dishes. Ingredients should have a name and calories.
- 
+
 Two migrations have been made for you. The one to many relationship has been set up. You will need to create migrations for the many to many relationship between ingredients and dishes. You do not need to do model testing for validations, just make sure you test any relationships and model methods that you create.
- 
+
 (Note: The plural of dish is dishes. The plural of chef is chefs.)
- 
+
 Instructions
 * Work on this challenge independently.
 * Complete the stories below
 * Commit Frequently
 * Push your code to your fork once the time is up (not before!)
- 
-``` 
+
+```
 Story 1 of 3
 As a visitor
 When I visit a dish's show page
@@ -63,7 +66,7 @@ And I see a list of ingredients for that dish
 And I see the chef's name
 ```
 
-``` 
+```
 Story 2 of 3
 As a visitor
 When I visit a dish's show page
@@ -81,7 +84,7 @@ I'm taken to a chef's ingredient index page
 and I can see a unique list of names of all the ingredients that this chef uses
 ```
 
-``` 
+```
 Extension
 As a visitor
 When I visit a chef's show page
