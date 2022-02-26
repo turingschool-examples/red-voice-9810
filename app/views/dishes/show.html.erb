@@ -3,12 +3,7 @@
   <p><%= @dish.description %></p>
 </div>
 
-<div class="ingredients">
-  <h3><%= @dish.name %> Ingredients </h3>
-  <% @dish.ingredients.each do |ingr| %>
-    <li><%= ingr.name %></li>
-  <% end %>
-</div>
+<%= render partial: 'dish_ingredients' %>
 
 <div class="calories">
   <h3>Calories per dish: <%= @dish.calorie_count %></h3>
