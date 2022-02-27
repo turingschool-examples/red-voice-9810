@@ -1,6 +1,7 @@
 <h1> The Dish Show Page </h1>
 <%= @dish.name %>
 <%= @dish.description %>
+<%= @dish.chef.name %>
 
 <% @dish.ingredients.each do |ingredient| %>
   <section id= "<%= ingredient.name.parameterize %>">
