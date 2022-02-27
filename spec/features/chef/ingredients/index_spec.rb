@@ -22,6 +22,7 @@ RSpec.describe 'Chef Ingredients Index Page' do
   
   it "Displays all ingredients a chef uses in their dishes" do 
     visit chef_ingredients_path(@chef.id)
+    save_and_open_page
     within '#ingredients' do 
       expect(page).to have_content(@ingredient1.name)
       expect(page).to have_content(@ingredient2.name)
