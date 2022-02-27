@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the chef show page' do
+RSpec.describe 'the dish show page' do
   before (:each) do
     @chef_1 = Chef.create!(name: "Da Cook")
     @chef_2 = Chef.create!(name: "Duther Gui")
@@ -34,15 +34,10 @@ RSpec.describe 'the chef show page' do
     @di_9 = DishIngredient.create!(dish_id: @dish_22.id, ingredient_id: @ingred_9.id)
   end
 
-  it 'names the chef' do
-    visit "/chefs/#{@chef_1.id}"
-    expect(page).to have_content("#{@chef_1.name}")
-  end
-
-  it 'has a link to a chefs ingredient list' do
-    visit "/chefs/#{@chef_1.id}"
-    click_on "ingredient index"
-    expect(current_path).to eq("/chefs/#{chef_1.id}/ingredients")
-
+  it 'lists a chefs ingredients' do
+    visit "/chefs/#{@chef_1.id}/ingredients"
+    expect(page).to have_content(@ingred_1.name)
+    expect(page).to have_content(@ingred_2.name)
+    expect(page).to have_content(@ingred_3.name)
   end
 end
