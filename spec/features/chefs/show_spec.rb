@@ -40,14 +40,9 @@ RSpec.describe "chef show page", type: :feature do
 
     visit "/chefs/#{chef_1.id}"
 
-    expect(page).to have_link(ingredient_1.name)
-    expect(page).to have_link(ingredient_2.name)
-    expect(page).to_not have_link(ingredient_3.name)
-    expect(page).to have_link(ingredient_4.name)
-    expect(page).to have_link(ingredient_5.name)
-    expect(page).to have_link(ingredient_6.name)
+    expect(page).to have_link("#{chef_1.name}'s Ingredients")
 
-    click_on "ingredient_1.name"
+    click_on "#{chef_1.name}'s Ingredients"
 
     expect(current_path).to eq("/chefs/#{chef_1.id}/ingredients")
   end
