@@ -2,4 +2,12 @@
 
 <%= @chef.name %>
 
-<%= link_to "List of ingredients #{@chef.name} uses in their dishes", chef_ingredients_path(@chef.id)%>  
+<%= link_to "List of ingredients #{@chef.name} uses in their dishes", chef_ingredients_path(@chef.id)%>
+
+<section id="top-three-ingredients">
+<p>Top Three Ingredients Used: <% @chef.top_three_ingredients.each_with_index do |ingredient, index| %>
+  <section id= "top_ingredient-<%= ingredient.id %>">
+    <p>Rank: <%= "#{index += 1} #{ingredient.name}" %></p>
+  </section>
+<% end %>
+</section>
