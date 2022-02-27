@@ -1,3 +1,5 @@
 <h1> Chef Show Page </h1>
 
 <%= @chef.name %>
+
+<%= link_to "List of ingredients #{@chef.name} uses in their dishes", chef_ingredients_path(@chef.id)%>  
