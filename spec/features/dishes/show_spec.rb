@@ -41,6 +41,12 @@ RSpec.describe 'Dish Show Page' do
 
   it 'Displays the total calorie count for a dish' do 
     visit dish_path(@dish2.id)
-    expect(page).to have_content(@chef.name)
+    within '#calorie-count' do
+    # "Better" practice here to be dynamic or just make sure the correct hard-coded thing shows up on the page?
+    # Since we've already tested the dynamic value works in the model?
+      expect(page).to have_content(@dish2.calorie_count)
+      expect(page).to have_content(225)
+      expect(page).to have_no_content(@dish1.calorie_count)
+    end 
   end 
 end 
