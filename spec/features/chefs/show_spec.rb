@@ -50,16 +50,18 @@ RSpec.describe 'Chef Show Page' do
     joins_row9 = DishIngredient.create!(ingredient_id: ingredient4.id, dish_id: dish1.id)
     joins_row10 = DishIngredient.create!(ingredient_id: ingredient4.id, dish_id: dish2.id)
 
-     visit chef_path(chef.id)
-      within "#top_ingredient-#{ingredient1.id}" do 
-        expect(page).to have_content("Rank: 1 #{ingredient1.name}")
-      end 
-      within "#top_ingredient-#{ingredient3.id}" do 
-        expect(page).to have_content("Rank: 2 #{ingredient3.name}")
-      end 
-      within "#top_ingredient-#{ingredient4.id}" do 
-        expect(page).to have_content("Rank: 3 #{ingredient4.name}")
-      end 
+    visit chef_path(chef.id)
+    within '#top-three-ingredients' do 
+      expect(page).to have_no_content(ingredient2.name)
     end 
-
+    within "#top_ingredient-#{ingredient1.id}" do 
+      expect(page).to have_content("Rank: 1 #{ingredient1.name}")
+    end 
+    within "#top_ingredient-#{ingredient3.id}" do 
+      expect(page).to have_content("Rank: 2 #{ingredient3.name}")
+    end 
+    within "#top_ingredient-#{ingredient4.id}" do 
+      expect(page).to have_content("Rank: 3 #{ingredient4.name}")
+    end 
+  end 
 end 
