@@ -1,0 +1,9 @@
+<h1> Chefs Ingredients Index Page </h1>
+
+<section id="ingredients">
+<% @chef.ingredients.each do |ingredient| %>
+  <section id= "<%= ingredient.name.parameterize %>">
+    <%= ingredient.name %>
+  </section>
+<% end %>
+</section>
