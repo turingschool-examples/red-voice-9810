@@ -1,19 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "chef show page", type: :feature do
-  it "visits the show page and sees the chef's name" do
-    chef_1 = Chef.create!(name: "Austin")
-    chef_2 = Chef.create!(name: "Noel")
-    visit "/chefs/#{chef_1.id}"
-
-    expect(current_path).to eq("/chefs/#{chef_1.id}")
-    expect(current_path).to_not eq("/chefs/#{chef_2.id}")
-
-    expect(page).to have_content(chef_1.name)
-    expect(page).to_not have_content(chef_2.name)
-  end
-
-  it "lists the ingredients of all their dishes as links to a chefs ingredient index page" do
+RSpec.describe "chef ingredients index page", type: :feature do
+  it "visits the chef's ingredients index page and sees all its ingredients" do
     chef_1 = Chef.create!(name: "Austin")
     chef_2 = Chef.create!(name: "Noel")
 
@@ -38,17 +26,15 @@ RSpec.describe "chef show page", type: :feature do
     dish_ingredient_7 = DishIngredient.create!(dish_id: dish_4.id, ingredient_id: ingredient_2.id)
     dish_ingredient_8 = DishIngredient.create!(dish_id: dish_4.id, ingredient_id: ingredient_6.id)
 
-    visit "/chefs/#{chef_1.id}"
-
-    expect(page).to have_link(ingredient_1.name)
-    expect(page).to have_link(ingredient_2.name)
-    expect(page).to_not have_link(ingredient_3.name)
-    expect(page).to have_link(ingredient_4.name)
-    expect(page).to have_link(ingredient_5.name)
-    expect(page).to have_link(ingredient_6.name)
-
-    click_on "ingredient_1.name"
+    visit "/chefs/#{chef_1.id}/ingredients"
 
     expect(current_path).to eq("/chefs/#{chef_1.id}/ingredients")
+
+    expect(page).to have_content(ingredient_1.name)
+    expect(page).to have_content(ingredient_2.name)
+    expect(page).to_not have_content(ingredient_3.name)
+    expect(page).to have_content(ingredient_4.name)
+    expect(page).to have_content(ingredient_5.name)
+    expect(page).to have_content(ingredient_6.name)
   end
 end
