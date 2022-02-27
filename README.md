@@ -6,7 +6,7 @@ User Stories 1-3 completed plus extensions
 * Area of improvement include:
   * Further/deeper knowledge of ActiveRecord 
   * Further/deeper knowledge of which controllers to use when using nested URI's and routes 
-  * Remembering explicit syntax in regards to commpland line rails commands
+  * Remembering explicit syntax in regards to rails commands in the command line
   * Remembering explicit syntax in testing relationships 
   * Need more practice using partials and forms 
 
