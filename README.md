@@ -2,9 +2,9 @@
 
 User Stories 1-3 completed plus extensions 
 
-* I felt I did fairly well in this IC. I am starting to gain a better knowledge of restfulness and seperating logic. I also utilized resources which is the first time I have done so independently. I tried to limit the access to only needed routes. ActiveRecord is getting stronger, although I did see am areas where I cam improve in my knowledge. 
+* I felt I did fairly well in this IC. I am starting to gain a better knowledge of restfulness and seperating logic. I also utilized resources which is the first time I have done so independently. I tried to limit the access to only needed routes. ActiveRecord is getting stronger, although I did see some areas where I can improve in my knowledge. 
 * Area of improvement include:
-  * Further/deeper knowledge of ActiveRecord 
+  * Further/deeper knowledge of ActiveRecord, specifically deep in a query such as joining, grouping, ordering, and aggregating  
   * Further/deeper knowledge of which controllers to use when using nested URI's and routes 
   * Remembering explicit syntax in regards to rails commands in the command line
   * Remembering explicit syntax in testing relationships 
