@@ -38,4 +38,12 @@ RSpec.describe 'the dish show page' do
     expect(page).to have_content("#{@dish_1.name}")
     expect(page).to have_content("#{@dish_1.description}")
   end
+
+  it 'lists the dishes ingredents' do
+    visit "/dishes/#{@dish_1.id}"
+    within '.ingredients_list' do
+      expect(page).to have_content("#{@ingred_1.name}")
+      expect(page).to have_content("#{@ingred_2.name}")
+    end
+  end
 end

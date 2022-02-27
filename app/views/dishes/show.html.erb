@@ -1,0 +1,9 @@
+<%= @dish.name %>
+<%= @dish.description %>
+
+<div class="ingredients_list">
+  <% @dish.ingredients.each do |ingredient| %>
+    <%= "#{ingredient.name}" %>
+  <% end %>
+
+</div>
