@@ -48,5 +48,9 @@ RSpec.describe Dish, type: :model do
     it 'knows a chefs name' do
       expect(@dish_1.chef_name).to eq(@chef_1.name)
     end
+
+    it 'can count calories in a dish' do
+      expect(@dish_1.callorie_count).to eq(200)
+    end
   end
 end
