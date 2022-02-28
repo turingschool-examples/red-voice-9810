@@ -24,7 +24,7 @@ RSpec.describe 'Dish' do
     end
 
     it 'list name of dish, description, list of ingredients, chef name' do
-      visit "/dish/#{@dish.id}"
+      visit "/dishes/#{@dish.id}"
 
       expect(page).to have_content(@dish.name)
       expect(page).to have_content(@dish.description)

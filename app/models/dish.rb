@@ -4,4 +4,8 @@ class Dish <ApplicationRecord
 
   has_many :dish_ingredients
   has_many :ingredients, through: :dish_ingredients
+
+  def get_chef_name
+    chef.name
+  end
 end

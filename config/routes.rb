@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  get '/dish/:id', to: 'dish#show'
+  get '/dishes/:id', to: 'dishes#show'
 end
