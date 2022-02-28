@@ -7,4 +7,10 @@ class Dish <ApplicationRecord
   def add_ingredient(ingredient)
     ingredients << ingredient
   end
+
+  def calorie_count
+    # for some reason sum is throwing an error
+    ingredient_calories = self.ingredients.pluck(:calories)
+    return ingredient_calories.sum
+  end
 end
