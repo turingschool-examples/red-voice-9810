@@ -34,9 +34,5 @@ RSpec.describe 'Dish' do
 
       expect(page).to have_content(@dish.calorie_count)
     end
-
-
-
-
   end
 end
