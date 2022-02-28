@@ -8,4 +8,5 @@ class Dish <ApplicationRecord
   def get_chef_name
     chef.name
   end
+
 end
