@@ -1,9 +1,3 @@
-# As a visitor
-# When I visit a dish's show page
-# I see the dish’s name and description
-# And I see a list of ingredients for that dish
-# And I see the chef's name
-
 require 'rails_helper'
 
 RSpec.describe 'Dish' do
@@ -23,7 +17,7 @@ RSpec.describe 'Dish' do
       @recipe_4 = DishIngredient.create!(dish_id: @dish.id, ingredient_id: @ingredient_4.id)
     end
 
-    it 'list name of dish, description, list of ingredients, chef name' do
+    it 'User Story 1 - list name of dish, description, list of ingredients, chef name' do
       visit "/dishes/#{@dish.id}"
 
       expect(page).to have_content(@dish.name)
@@ -34,5 +28,15 @@ RSpec.describe 'Dish' do
       expect(page).to have_content(@ingredient_3.name)
       expect(page).to have_content(@ingredient_4.name)
     end
+
+    it 'User Story 2 - lists total calorie count' do
+      visit "/dishes/#{@dish.id}"
+
+      expect(page).to have_content(@dish.calorie_count)
+    end
+
+
+
+
   end
 end
