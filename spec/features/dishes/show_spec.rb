@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Dish Show Page' do
   before :each do
-
+    @chef_1 = Chef.create!(name: "Gordan Ramsey")
+    @dish_1 = @chef_1.dishes.create!(name: "Beef Welington", description: "Giant wrapped beef")
   end
 
   it "shows dishes attributes" do

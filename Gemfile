@@ -40,7 +40,9 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'pry'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'simplecov'
+  gem 'orderly'
 end
 
 group :development do
