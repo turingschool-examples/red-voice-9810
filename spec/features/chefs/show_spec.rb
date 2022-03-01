@@ -22,7 +22,7 @@ RSpec.describe "Chefs show page" do
   it "has a link to chefs ingredients index page" do
     visit chef_path(@chef)
     click_on 'Ingredients'
-    expect(page).to eq(chef_ingredients_path(@chef))
+    expect(current_path).to eq(chef_ingredients_path(@chef))
   end
 
 end
