@@ -22,6 +22,8 @@ RSpec.describe 'chef show page' do
     expect(page).to have_content(@chef_1.name)
   end
 
-  it 'shows a link '
+  it 'shows a link to all ingredients used' do
+    expect(page).to have_link("Ingredients Used")
+  end
 
 end
