@@ -58,7 +58,6 @@ RSpec.describe 'Dish Show Page' do
       within "div.chef" do
         expect(page).to have_content(@gunnar.name)
         expect(page).to_not have_content(@sakic.name)
-        save_and_open_page
       end
     end
   end
