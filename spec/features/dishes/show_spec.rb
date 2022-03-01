@@ -1,0 +1,48 @@
+require 'rails_helper'
+
+RSpec.describe 'dishes show' do
+    before(:each) do
+        @chef_1 = Chef.create!(name: "Emeril")
+        @chef_2 = Chef.create!(name: "Bobby Flay")
+        @dish_1 = Dish.create!(name: "Tacos", description: "Meat and deliciousness with tortillas", chef_id: @chef_1.id)
+        @dish_2 = Dish.create!(name: "Fried Pickles", description: "Pickles... Fried.", chef_id: @chef_1.id)
+        @dish_3 = Dish.create!(name: "Ramen", description: "Adult soup", chef_id: @chef_1.id)
+        @dish_4 = Dish.create!(name: "Spaghetti", description: "Long noodles with meat sauce", chef_id: @chef_2.id)
+        @dish_5 = Dish.create!(name: "BBQ", description: "Slowly smoked meat that will make you miss summers on the patio", chef_id: @chef_2.id)
+        @ingredient_1 = Ingredient.create!(name: "Carnitas", calories: 220)
+        @ingredient_2 = Ingredient.create!(name: "Tortilla", calories: 150)
+        @ingredient_3 = Ingredient.create!(name: "Cheese", calories: 300)
+        @ingredient_4 = Ingredient.create!(name: "Pickle", calories: 50)
+        @ingredient_5 = Ingredient.create!(name: "Noodle", calories: 250)
+        @ingredient_6 = Ingredient.create!(name: "Brisket", calories: 310)
+        @ingredient_7 = Ingredient.create!(name: "Tomatoe Sauce", calories: 200)
+        @dish_ingredient_1 = DishIngredient.create!(dish_id: @dish_1.id, ingredient_id: @ingredient_1.id)
+        @dish_ingredient_2 = DishIngredient.create!(dish_id: @dish_1.id, ingredient_id: @ingredient_2.id)
+        @dish_ingredient_3 = DishIngredient.create!(dish_id: @dish_1.id, ingredient_id: @ingredient_3.id)
+        @dish_ingredient_4 = DishIngredient.create!(dish_id: @dish_2.id, ingredient_id: @ingredient_4.id)
+        @dish_ingredient_5 = DishIngredient.create!(dish_id: @dish_3.id, ingredient_id: @ingredient_5.id)
+        @dish_ingredient_6 = DishIngredient.create!(dish_id: @dish_4.id, ingredient_id: @ingredient_5.id)
+        @dish_ingredient_6 = DishIngredient.create!(dish_id: @dish_4.id, ingredient_id: @ingredient_7.id)
+        @dish_ingredient_7 = DishIngredient.create!(dish_id: @dish_5.id, ingredient_id: @ingredient_1.id)
+        @dish_ingredient_7 = DishIngredient.create!(dish_id: @dish_5.id, ingredient_id: @ingredient_6.id)
+    end
+
+    it 'has the dish info, chef name, and dish ingredients' do
+        visit "/dishes/#{@dish_1.id}/"
+
+        expect(page).to have_content(@dish_1.name)
+        expect(page).to have_content(@dish_1.description)
+        expect(page).to have_content(@chef_1.name)
+
+        expect(page).to_not have_content(@dish_2.name)
+        expect(page).to_not have_content(@chef_2.name)
+
+        within "#ingredients" do 
+            expect(page).to have_content(@ingredient_1.name)
+            expect(page).to have_content(@ingredient_2.name)
+            expect(page).to have_content(@ingredient_3.name)
+            expect(page).to_not have_content(@ingredient_4.name)
+        end
+    end
+
+end
