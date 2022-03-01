@@ -1,0 +1,7 @@
+<h1><%= "#{@chef.name}'s Favorite Ingredients" %></h1>
+<br>
+<% @chef.get_ingredients.each do |ingredient| %>
+  <ol><%= ingredient.name %></ol>
+<% end %>
+<br>
+<%= link_to "Explore #{@chef.name}'s Ingredients", "/chefs/#{@chef.id}/ingredients" %>
