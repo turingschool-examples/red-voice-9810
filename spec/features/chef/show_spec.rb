@@ -1,20 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe Chef, type: :model do
-  describe "validations" do
-    it {should validate_presence_of :name}
-  end
-  describe "relationships" do
-    it {should have_many :dishes}
-  end
-
-  describe "instance methods:" do
+RSpec.describe 'the chef show page: ', type: :feature do
+  describe 'US3: ' do
     before :each do
       @chef_1 = Chef.create(name: 'Jeff')
+      @chef_2 = Chef.create(name: 'Chet')
 
       @dish_1 = @chef_1.dishes.create(name: 'Chicken & Waffles', description: 'just like it says')
       @dish_2 = @chef_1.dishes.create(name: 'Pork Chops', description: 'grilled pork chop')
       @dish_3 = @chef_1.dishes.create(name: 'Casserole', description: 'tuna lasagna casserole')
+
       @dish_4 = @chef_2.dishes.create(name: 'Hot Dogs', description: 'kosher beef in a bun')
 
       @ingredient_1 = Ingredient.create(name: 'fried chicken', calories: 540)
@@ -35,6 +30,11 @@ RSpec.describe Chef, type: :model do
       DishIngredient.create(dish_id: @dish_1.id, ingredient_id: @ingredient_3.id )
       DishIngredient.create(dish_id: @dish_1.id, ingredient_id: @ingredient_4.id )
 
+      DishIngredient.create(dish_id: @dish_4.id, ingredient_id: @ingredient_3.id )
+      DishIngredient.create(dish_id: @dish_4.id, ingredient_id: @ingredient_4.id )
+      DishIngredient.create(dish_id: @dish_4.id, ingredient_id: @ingredient_8.id )
+      DishIngredient.create(dish_id: @dish_4.id, ingredient_id: @ingredient_11.id )
+
       DishIngredient.create(dish_id: @dish_2.id, ingredient_id: @ingredient_2.id )
       DishIngredient.create(dish_id: @dish_2.id, ingredient_id: @ingredient_4.id )
       DishIngredient.create(dish_id: @dish_2.id, ingredient_id: @ingredient_7.id )
@@ -47,26 +47,16 @@ RSpec.describe Chef, type: :model do
       DishIngredient.create(dish_id: @dish_3.id, ingredient_id: @ingredient_11.id )
       DishIngredient.create(dish_id: @dish_3.id, ingredient_id: @ingredient_12.id )
 
-      DishIngredient.create(dish_id: @dish_4.id, ingredient_id: @ingredient_3.id )
-      DishIngredient.create(dish_id: @dish_4.id, ingredient_id: @ingredient_4.id )
-      DishIngredient.create(dish_id: @dish_4.id, ingredient_id: @ingredient_8.id )
-      DishIngredient.create(dish_id: @dish_4.id, ingredient_id: @ingredient_11.id )
+      visit "/chefs/#{id}"
     end
 
-    it "US 3: gets a list of all ingredients used by a chef" do
-      expected = [
-        @ingredient_1,
-        @ingredient_2,
-        @ingredient_3,
-        @ingredient_4,
-        @ingredient_5,
-        @ingredient_6,
-        @ingredient_7,
-        @ingredient_8,
-        @ingredient_11,
-        @ingredient_12
-      ]
-      expect(@chef_1.get_ingredients).to eq(expected)
+    it 'has the chefs name' do
+      expect(page).to have_content(@chef_1.name)
+    end
+
+    it 'has a link to the chefs ingredients page' do
+      click_on("Explore #{@chef_1.name}'s Ingredients")
+      expect(path).to eq "/chefs/#{@chef_1.id}/ingredients"
     end
   end
 end

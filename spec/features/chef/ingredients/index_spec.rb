@@ -1,14 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Chef, type: :model do
-  describe "validations" do
-    it {should validate_presence_of :name}
-  end
-  describe "relationships" do
-    it {should have_many :dishes}
-  end
-
-  describe "instance methods:" do
+RSpec.describe 'the chef ingredients index page: ', type: :feature do
+  describe 'US3: ' do
     before :each do
       @chef_1 = Chef.create(name: 'Jeff')
 
@@ -51,22 +44,27 @@ RSpec.describe Chef, type: :model do
       DishIngredient.create(dish_id: @dish_4.id, ingredient_id: @ingredient_4.id )
       DishIngredient.create(dish_id: @dish_4.id, ingredient_id: @ingredient_8.id )
       DishIngredient.create(dish_id: @dish_4.id, ingredient_id: @ingredient_11.id )
+
+      visit "/chefs/#{@chef_1.id}/ingredients"
     end
 
-    it "US 3: gets a list of all ingredients used by a chef" do
-      expected = [
-        @ingredient_1,
-        @ingredient_2,
-        @ingredient_3,
-        @ingredient_4,
-        @ingredient_5,
-        @ingredient_6,
-        @ingredient_7,
-        @ingredient_8,
-        @ingredient_11,
-        @ingredient_12
-      ]
-      expect(@chef_1.get_ingredients).to eq(expected)
+    it 'shows a list of all the ingredients the chef uses' do
+
+      expect(page).to have_content("#{@chef_1}'s Favorite Ingredients")
+
+      expect(page).to have_content(@ingredient_1.name)
+      expect(page).to have_content(@ingredient_2.name)
+      expect(page).to have_content(@ingredient_3.name)
+      expect(page).to have_content(@ingredient_4.name)
+      expect(page).to have_content(@ingredient_5.name)
+      expect(page).to have_content(@ingredient_6.name)
+      expect(page).to have_content(@ingredient_7.name)
+      expect(page).to have_content(@ingredient_8.name)
+      expect(page).to have_content(@ingredient_11.name)
+      expect(page).to have_content(@ingredient_12.name)
+
+      expect(page).to_not have_content(@ingredient_9.name)
+      expect(page).to_not have_content(@ingredient_10.name)
     end
   end
 end

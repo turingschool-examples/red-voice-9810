@@ -11,10 +11,6 @@ RSpec.describe Dish, type: :model do
     it {should have_many(:ingredients).through(:dish_ingredients)}
   end
 
-  describe "class methods:" do
-
-  end
-
   describe "instance methods:" do
 
     before :each do
@@ -41,6 +37,5 @@ RSpec.describe Dish, type: :model do
     xit 'get_ingredients' do
 
     end
-
   end
 end
