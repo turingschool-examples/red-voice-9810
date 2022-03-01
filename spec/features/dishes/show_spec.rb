@@ -1,11 +1,5 @@
 require 'rails_helper'
 
-# As a visitor
-# When I visit a dish's show page
-# I see the dish’s name and description
-# And I see a list of ingredients for that dish
-# And I see the chef's name
-
 RSpec.describe 'Dish Show Page' do
   before(:each) do
     @gunnar = Chef.create!(name: "Gunnar")
@@ -17,7 +11,7 @@ RSpec.describe 'Dish Show Page' do
     @noodles = Ingredient.create!(name: 'Noodles', calories: 300)
     @cheese = Ingredient.create!(name: 'Cheese', calories: 200)
     @pepper = Ingredient.create!(name: 'Pepper', calories: 5)
-    @pork = Ingredient.create!(name: 'Enchilida Sauce', calories: 50)
+    @pork = Ingredient.create!(name: 'Pork', calories: 50)
 
     @dish1 = DishIngredient.create!(dish_id: @pasta.id, ingredient_id: @noodles.id )
     @dish2 = DishIngredient.create!(dish_id: @pasta.id, ingredient_id: @cheese.id )
@@ -29,7 +23,7 @@ RSpec.describe 'Dish Show Page' do
 
   end
 
-  describe 'Story 1 -shows dish name, description, ingredients and chefs name' do
+  describe 'US1 -shows dish name, description, ingredients and chefs name' do
     it 'shows dish name & description' do
       visit dish_path(@pasta)
       expect(current_path).to eq(dish_path(@pasta))
@@ -58,6 +52,15 @@ RSpec.describe 'Dish Show Page' do
       within "div.chef" do
         expect(page).to have_content(@gunnar.name)
         expect(page).to_not have_content(@sakic.name)
+      end
+    end
+  end
+  describe "When I visit a dish's show page I see the total calorie count for that dish." do
+    it 'shows total calorie count' do
+      visit dish_path(@pasta)
+
+      within "div.calories" do
+        expect(page).to have_content("Total Calories: 505")
       end
     end
   end
