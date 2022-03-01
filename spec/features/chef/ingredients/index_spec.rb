@@ -11,7 +11,7 @@ RSpec.describe "Chefs show page" do
     @ingredient1 = Ingredient.create!(name: "flour", calories: 364)
     @ingredient2 = Ingredient.create!(name: "butter", calories: 128)
     @ingredient3 = Ingredient.create!(name: "sugar", calories: 228)
-    @ingredient3 = Ingredient.create!(name: "chocolate chips", calories: 128)
+    @ingredient4 = Ingredient.create!(name: "chocolate chips", calories: 128)
     @dish_ingredient1 = DishIngredient.create!(dish_id: @dish1.id, ingredient_id: @ingredient1.id)
     @dish_ingredient2 = DishIngredient.create!(dish_id: @dish1.id, ingredient_id: @ingredient2.id)
     @dish_ingredient3 = DishIngredient.create!(dish_id: @dish3.id, ingredient_id: @ingredient3.id)
