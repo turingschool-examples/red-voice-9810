@@ -24,14 +24,15 @@ RSpec.describe 'Dish Show page' do
       DishIngredient.create!(ingredient_id: @bread.id, dish_id: @chili.id)
 
     end
-    # require "pry"; binding.pry
+
     describe "will show a dish's attributes" do
     it 'will list' do
       visit dish_path(@chili.id)
-
+save_and_open_page
      expect(page).to have_content(@chili.name)
      expect(page).to have_content(@chili.description)
      expect(page).to have_content(@chef1.name)
+     expect(page).to have_content(@chili.total_calories)
 
      within('#ingredient-0') do
        expect(page).to have_content(@sugar.name)
