@@ -27,6 +27,8 @@ RSpec.describe "Dishes show page" do
   end
 
   it "has a calorie count for the dish" do
+    visit dish_path(@dish1)
+    
     expect(page).to have_content(@dish1.calorie_count)
   end
 
