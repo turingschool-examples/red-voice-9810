@@ -11,9 +11,10 @@ RSpec.describe 'dish show page' do
     expect(page).to have_content(risotto.description)
   end
 
-  it 'displays a list of ingredients and the chef name' do
+  it 'displays a list of ingredients for that dish and the chef name' do
     chef_1 = Chef.create!(name: "Gordon Ramsey")
     risotto = chef_1.dishes.create!(name: "Risotto", description: "Italian rice dish")
+    scallops = chef_1.dishes.create!(name: "Scallops", description: "Crispy and pan seared")
     rice = Ingredient.create!(name: "rice", calories: 300)
     broth = Ingredient.create!(name: "broth", calories: 250)
     butter = Ingredient.create!(name: "butter", calories: 400)
@@ -25,6 +26,7 @@ RSpec.describe 'dish show page' do
     visit "/dishes/#{risotto.id}"
 
     expect(page).to have_content(rice.name)
+    expect(page).to_not have_content(scallops.name)
     expect(page).to have_content(broth.name)
     expect(page).to have_content(butter.name)
     expect(page).to have_content(chef_1.name)
