@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   get '/dishes/:id', to: 'dishes#show'
-  get '/chef/:id', to: 'chef#show'
-  get '/chef/:id/ingredients', to: 'ingredients#chef_index'
+  get '/chefs/:id', to: 'chefs#show'
+  get '/chefs/:id/ingredients', to: 'ingredients#chef_index'
 
 end

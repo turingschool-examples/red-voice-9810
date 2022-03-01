@@ -4,6 +4,7 @@ RSpec.describe 'the chef ingredients index page: ', type: :feature do
   describe 'US3: ' do
     before :each do
       @chef_1 = Chef.create(name: 'Jeff')
+      @chef_2 = Chef.create(name: 'Chet')
 
       @dish_1 = @chef_1.dishes.create(name: 'Chicken & Waffles', description: 'just like it says')
       @dish_2 = @chef_1.dishes.create(name: 'Pork Chops', description: 'grilled pork chop')

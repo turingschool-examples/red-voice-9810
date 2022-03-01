@@ -5,8 +5,8 @@ RSpec.describe 'the dish show page: ', type: :feature do
 
     before :each do
       @chef_1 = Chef.create(name: 'Jeff')
-      @dish_1 = chef_1.dishes.create(name: 'Chicken & Waffles', description: 'just like it says')
-      @dish_2 = chef_1.dishes.create(name: 'Pork Chops', description: 'grilled pork chop')
+      @dish_1 = @chef_1.dishes.create(name: 'Chicken & Waffles', description: 'just like it says')
+      @dish_2 = @chef_1.dishes.create(name: 'Pork Chops', description: 'grilled pork chop')
       @ingredient_1 = Ingredient.create(name: 'fried chicken', calories: 540)
       @ingredient_2 = Ingredient.create(name: 'butter', calories: 40)
       @ingredient_3 = Ingredient.create(name: 'egg', calories: 200)
