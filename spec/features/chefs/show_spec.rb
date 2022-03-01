@@ -22,4 +22,6 @@ RSpec.describe 'chef show page' do
     expect(page).to have_content(@chef_1.name)
   end
 
+  it 'shows a link '
+
 end
