@@ -27,4 +27,9 @@ RSpec.describe 'Dishes show page' do
     expect(page).to_not have_content(@ingredient_3.name)
     expect(page).to have_content('Guy Fieri')
   end
+
+  it "shows calorie count for that dish" do
+    visit "dishes/#{@dish_1.id}"
+    expect(page).to have_content("Total Calories: 1500")
+  end
 end
