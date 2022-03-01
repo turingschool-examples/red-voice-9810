@@ -1,3 +1,3 @@
-class Chefs < ApplicationController
+class ChefsController < ApplicationController
 
 end

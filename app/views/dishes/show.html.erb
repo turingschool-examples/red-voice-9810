@@ -1,0 +1,10 @@
+<h1> <%= @dish.name %> </h1>
+<%= @dish.description %><br>
+<%= @dish.chef.name %><br>
+<h2>Ingredients Added:</h2>
+<% @dish.ingredients.each_with_index do |ingredient, index| %>
+  <div id="ingredient-<%= index %>">
+    <h3><%= ingredient.name %></h3>
+<br>
+    <% end %>
+  </div>
