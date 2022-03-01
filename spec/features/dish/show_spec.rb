@@ -1,21 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Dish, type: :model do
-  describe "validations" do
-    it {should validate_presence_of :name}
-    it {should validate_presence_of :description}
-  end
-  describe "relationships" do
-    it {should belong_to :chef}
-    it {should have_many(:dish_ingredients)}
-    it {should have_many(:ingredients).through(:dish_ingredients)}
-  end
-
-  describe "class methods:" do
-
-  end
-
-  describe "instance methods:" do
+RSpec.describe 'the dish show page: ', type: :feature do
+  describe 'US1: ' do
 
     before :each do
       @chef_1 = Chef.create(name: 'Jeff')
@@ -31,16 +17,31 @@ RSpec.describe Dish, type: :model do
       DishIngredient.create(dish_id: @dish_1.id, ingredient_id: @ingredient_3.id)
       DishIngredient.create(dish_id: @dish_1.id, ingredient_id: @ingredient_4.id)
       DishIngredient.create(dish_id: @dish_2.id, ingredient_id: @ingredient_5.id )
+      visit "/dishes/#{@dish_1.id}"
     end
 
-    it 'calorie_count' do
-      expect(@dish_1.calorie_count).to eq(790)
-      expect(@dish_2.calorie_count).to eq(250)
+    it 'has the dishs name & description' do
+      expect(page).to have_content(@dish_1.name)
+      expect(page).to have_content(@dish_1.description)
     end
 
-    xit 'get_ingredients' do
+    it 'has all the ingredients in the dish & none that arent' do
+      expect(page).to have_content(@ingredient_1.name)
+      expect(page).to have_content(@ingredient_2.name)
+      expect(page).to have_content(@ingredient_3.name)
+      expect(page).to have_content(@ingredient_4.name)
 
+      expect(page).to_not have_content(@ingredient_5.name)
     end
 
+    it 'has the chefs name' do
+      expect(page).to have_content(@chef_1.name)
+    end
+
+    describe 'US2: ' do
+      it 'has a total calorie count' do
+        expect(page).to have_content("Total Calorie Count: #{@dish_1.calorie_count}")
+      end
+    end
   end
 end
