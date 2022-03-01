@@ -29,14 +29,14 @@ RSpec.describe 'dishes show' do
 
     it 'has the dish info, chef name, and dish ingredients' do
         visit "/dishes/#{@dish_1.id}/"
-
+        
         expect(page).to have_content(@dish_1.name)
         expect(page).to have_content(@dish_1.description)
         expect(page).to have_content(@chef_1.name)
-
+        
         expect(page).to_not have_content(@dish_2.name)
         expect(page).to_not have_content(@chef_2.name)
-
+        
         within "#ingredients" do 
             expect(page).to have_content(@ingredient_1.name)
             expect(page).to have_content(@ingredient_2.name)
@@ -44,5 +44,11 @@ RSpec.describe 'dishes show' do
             expect(page).to_not have_content(@ingredient_4.name)
         end
     end
-
+    
+    it 'shows total calorie count for dish' do 
+        visit "/dishes/#{@dish_1.id}/"
+        
+        expect(page).to have_content("Total Calories:")
+        expect(page).to have_content(@dish_1.total_calories)
+    end
 end
