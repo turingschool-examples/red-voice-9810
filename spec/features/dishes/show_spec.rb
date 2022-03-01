@@ -62,4 +62,14 @@ RSpec.describe 'Dish Show Page' do
     expect(page).to_not have_content(@ingredient_2.name)
     expect(page).to_not have_content(@ingredient_3.name)
   end
+
+  it 'Displays Calorie Count' do
+    visit "/dishes/#{@dish.id}"
+    expect(page).to have_content(@dish.total_calories)
+    expect(page).to_not have_content(@dish_two.total_calories)
+
+    visit "/dishes/#{@dish_two.id}"
+    expect(page).to have_content(@dish_two.total_calories)
+    expect(page).to_not have_content(@dish.total_calories)
+  end
 end
