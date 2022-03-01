@@ -51,5 +51,15 @@ RSpec.describe 'Dish Show Page' do
         expect(page).to_not have_content(@pork.name)
       end
     end
+    it 'shows chef name' do
+      visit dish_path(@pasta)
+      expect(current_path).to eq(dish_path(@pasta))
+
+      within "div.chef" do
+        expect(page).to have_content(@gunnar.name)
+        expect(page).to_not have_content(@sakic.name)
+        save_and_open_page
+      end
+    end
   end
 end
