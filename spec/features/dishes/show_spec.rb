@@ -18,7 +18,7 @@ RSpec.describe 'Show page' do
     expect(page).to have_content(ingredient3.name)
   end
 
-  xit 'shows the total calorie count for a dish' do
+  it 'shows the total calorie count for a dish' do
     chef = Chef.create!(name: 'King Chef')
     dish1 = chef.dishes.create!(name: 'King Krabé', description: 'Only food a king can eat')
     ingredient1 = dish1.ingredients.create!(name: 'Crab', calories: 20)
