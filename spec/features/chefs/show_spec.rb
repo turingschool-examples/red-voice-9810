@@ -31,17 +31,18 @@ RSpec.describe 'chefs show' do
         @dish_ingredient_12 = DishIngredient.create!(dish_id: @dish_4.id, ingredient_id: @ingredient_3.id)
         @dish_ingredient_13 = DishIngredient.create!(dish_id: @dish_5.id, ingredient_id: @ingredient_3.id)
     end
+
     it 'has chefs name and link to view all ingredients chef uses in dishes' do 
         visit "/chefs/#{@chef_1.id}/"
 
         expect(page).to have_content(@chef_1.name)
         expect(page).to_not have_content(@chef_2.name)
-
+        
         expect(page).to have_link("View Ingredients")
         click_link "View Ingredients"
         expect(current_path).to eq("/chefs/#{@chef_1.id}/ingredients/")
         expect(page).to have_content("#{@chef_1.name}'s Ingredients")
-
+        
         within "#ingredients" do 
             expect(page).to have_content(@ingredient_1.name)
             expect(page).to have_content(@ingredient_2.name)
@@ -50,6 +51,23 @@ RSpec.describe 'chefs show' do
             expect(page).to have_content(@ingredient_5.name)
             expect(page).to_not have_content(@ingredient_6.name)
             expect(page).to_not have_content(@ingredient_7.name)
+        end
+    end
+    
+    it 'shows the 3 most popular ingredients the chef uses in their dishes' do
+        visit "/chefs/#{@chef_2.id}/"
+        
+        expect(page).to have_content(@chef_2.name)
+        expect(page).to_not have_content(@chef_1.name)
+        
+        expect(page).to have_content("Most Popular Ingredients:")
+        
+        within "#popular_ingredients" do 
+            expect(page).to have_content(@ingredient_3.name)
+            expect(page).to have_content(@ingredient_5.name)
+            expect(page).to have_content(@ingredient_7.name)
+            expect(page).to_not have_content(@ingredient_1.name)
+            expect(page).to_not have_content(@ingredient_6.name)
         end
     end
 end
