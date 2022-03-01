@@ -17,7 +17,7 @@ RSpec.describe "Chefs show page" do
 
   it "has the names of its chefs ingredients" do
     visit chef_ingredients_path(@chef)
-
+    save_and_open_page
     expect(page).to have_content(@ingredient1.name)
     expect(page).to have_content(@ingredient2.name)
     expect(page).to_not have_content(@ingredient3.name)

@@ -3,6 +3,4 @@ class Chef::IngredientsController < ApplicationController
     @chef = Chef.find(params[:chef_id])
   end
 
-
-
 end
