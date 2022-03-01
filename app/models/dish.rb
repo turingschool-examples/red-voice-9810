@@ -5,10 +5,10 @@ class Dish <ApplicationRecord
   has_many :ingredients, through: :ingredient_dishes
 
   def list_of_ingredients
-    ingredients.pluck(:name)  
+    ingredients.pluck(:name)
   end
 
-  def chef_name
+  def name_of_chef
     chef.name
   end
 end

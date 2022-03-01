@@ -25,6 +25,6 @@ RSpec.describe 'dish show page' do
   expect(page).to have_content(dish_1.name)
   expect(page).to have_content(dish_1.description)
   expect(page).to have_content(dish_1.list_of_ingredients)
-  expect(page).to have_content(dish_1.chef_name)
+  expect(page).to have_content(dish_1.name_of_chef)
   end
 end
