@@ -8,3 +8,4 @@ RSpec.describe Chef, type: :model do
     it {should have_many :dishes}
   end
 end
+ 
