@@ -5,8 +5,8 @@ class Dish < ApplicationRecord
   has_many :ingredients, through: :dish_ingredients
 
   def calorie_count
-    # ingredients.sum(:calories)
-    ingredients.collect { |i| i.calories.to_i }.sum
+    ingredients.sum(:calories)
+    # ingredients.collect { |i| i.calories.to_i }.sum
     # I made calories a string not an int.
   end
 end
