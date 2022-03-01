@@ -44,10 +44,12 @@ RSpec.describe Dish, type: :model do
   end
 
   describe 'instance methods' do 
-    describe '.total_calories' do 
-      expect(@dish_1.total_calories).to eq(670)
-      expect(@dish_2.total_calories).to eq(50)
-      expect(@dish_5.total_calories).to eq(530)
+    describe '.total_calories' do
+      it 'returns the total calorie count for all ingredients in dish' do 
+        expect(@dish_1.total_calories).to eq(670)
+        expect(@dish_2.total_calories).to eq(50)
+        expect(@dish_5.total_calories).to eq(750)
+      end
     end
   end
 end
