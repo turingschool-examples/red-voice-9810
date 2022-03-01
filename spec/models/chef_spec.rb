@@ -11,6 +11,7 @@ RSpec.describe Chef, type: :model do
   describe "instance methods:" do
     before :each do
       @chef_1 = Chef.create(name: 'Jeff')
+      @chef_2 = Chef.create(name: 'Chet')
 
       @dish_1 = @chef_1.dishes.create(name: 'Chicken & Waffles', description: 'just like it says')
       @dish_2 = @chef_1.dishes.create(name: 'Pork Chops', description: 'grilled pork chop')
@@ -53,20 +54,24 @@ RSpec.describe Chef, type: :model do
       DishIngredient.create(dish_id: @dish_4.id, ingredient_id: @ingredient_11.id )
     end
 
-    it "US 3: gets a list of all ingredients used by a chef" do
+    it "get_ingredients" do
       expected = [
-        @ingredient_1,
-        @ingredient_2,
-        @ingredient_3,
-        @ingredient_4,
-        @ingredient_5,
-        @ingredient_6,
-        @ingredient_7,
-        @ingredient_8,
-        @ingredient_11,
-        @ingredient_12
+        @ingredient_1.name,
+        @ingredient_2.name,
+        @ingredient_3.name,
+        @ingredient_4.name,
+        @ingredient_5.name,
+        @ingredient_6.name,
+        @ingredient_7.name,
+        @ingredient_11.name,
+        @ingredient_12.name
       ]
-      expect(@chef_1.get_ingredients).to eq(expected)
+
+      actual = @chef_1.get_ingredients.map do |ing|
+        ing.name
+      end
+
+      expect(actual).to eq(expected)
     end
   end
 end
