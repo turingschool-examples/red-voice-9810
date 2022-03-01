@@ -5,6 +5,7 @@ class Dish <ApplicationRecord
   has_many :ingredients, through: :ingredient_dishes
 
   def list_of_ingredients
+    require "pry"; binding.pry
     ingredients.pluck(:name)
   end
 
