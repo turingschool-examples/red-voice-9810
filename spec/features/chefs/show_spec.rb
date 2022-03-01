@@ -37,6 +37,17 @@ RSpec.describe 'Chef' do
     # I'm taken to a chef's ingredient index page
     # and I can see a unique list of names of all the ingredients that this chef uses
     it 'User Story 3.2 - see the name and link to ingredient list' do
+      visit "/chefs/#{@chef_1.id}"
+      click_link "Ingredient List"
+
+      expect(current_path).to eq("/chefs/#{@chef_1.id}/ingredients")
+
+      expect(page).to have_content(@ingredient_1.name)
+      expect(page).to have_content(@ingredient_2.name)
+      expect(page).to have_content(@ingredient_3.name)
+      expect(page).to have_content(@ingredient_4.name)
+      expect(page).to have_content(@ingredient_5.name)
+      expect(page).to_not have_content(@ingredient_6.name)
     end
   end
 end
