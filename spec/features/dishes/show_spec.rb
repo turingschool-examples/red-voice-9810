@@ -14,6 +14,18 @@ RSpec.describe 'Dish Show Page' do
     @pasta = @gunnar.dishes.create!(name: "Pasta", description: "with cream sauce")
     @roast = @gunnar.dishes.create!(name: "Pork Roast", description: "with rosemary")
 
+    @noodles = Ingredient.create!(name: 'Noodles', calories: 300)
+    @cheese = Ingredient.create!(name: 'Cheese', calories: 200)
+    @pepper = Ingredient.create!(name: 'Pepper', calories: 5)
+    @pork = Ingredient.create!(name: 'Enchilida Sauce', calories: 50)
+
+    @dish1 = DishIngredient.create!(dish_id: @pasta.id, ingredient_id: @noodles.id )
+    @dish2 = DishIngredient.create!(dish_id: @pasta.id, ingredient_id: @cheese.id )
+    @dish3 = DishIngredient.create!(dish_id: @pasta.id, ingredient_id: @pepper.id )
+    @dish4 = DishIngredient.create!(dish_id: @roast.id, ingredient_id: @noodles.id )
+    @dish5 = DishIngredient.create!(dish_id: @roast.id, ingredient_id: @cheese.id )
+    @dish6 = DishIngredient.create!(dish_id: @roast.id, ingredient_id: @pork.id )
+
 
   end
 
@@ -26,6 +38,17 @@ RSpec.describe 'Dish Show Page' do
         expect(page).to have_content(@pasta.name)
         expect(page).to have_content(@pasta.description)
         expect(page).to_not have_content(@roast.name)
+      end
+    end
+    it 'shows ingredient list' do
+      visit dish_path(@pasta)
+      expect(current_path).to eq(dish_path(@pasta))
+
+      within "div.ingredients" do
+        expect(page).to have_content(@noodles.name)
+        expect(page).to have_content(@cheese.name)
+        expect(page).to have_content(@pepper.name)
+        expect(page).to_not have_content(@pork.name)
       end
     end
   end

@@ -2,3 +2,10 @@
   <h1><%= @dish.name %></h1>
   <p><%= @dish.description %></p>
 </div>
+
+<div class="ingredients">
+  <h3><%= @dish.name %> Ingredients </h3>
+  <% @dish.ingredients.each do |ingredient| %>
+    <li><%= ingredient.name %></li>
+  <% end %>
+</div>
