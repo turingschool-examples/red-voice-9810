@@ -30,6 +30,6 @@ RSpec.describe 'Dishes show page' do
 
   it "shows calorie count for that dish" do
     visit "dishes/#{@dish_1.id}"
-    expect(page).to have_content("Total Calories: 1500")
+    expect(page).to have_content("Total Calories:1500")
   end
 end
