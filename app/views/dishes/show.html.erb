@@ -7,3 +7,7 @@
 <% @dish.ingredients.each do |ingredient| %>
   <%= ingredient.name %>
 <% end %>
+
+<h4>Total energy gained:</h4>
+
+<%= @dish.total_energy %>

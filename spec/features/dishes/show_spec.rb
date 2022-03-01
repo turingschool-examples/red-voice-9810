@@ -17,5 +17,7 @@ describe 'dish show page' do
     expect(page).to have_content(cheese.name)
     expect(page).to have_content(chicken.name)
     expect(page).to have_content(grits.name)
+
+    expect(page).to have_content(cheese_grits.total_energy)
   end
 end
