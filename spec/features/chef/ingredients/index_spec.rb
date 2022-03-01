@@ -46,12 +46,12 @@ RSpec.describe 'the chef ingredients index page: ', type: :feature do
       DishIngredient.create(dish_id: @dish_4.id, ingredient_id: @ingredient_8.id )
       DishIngredient.create(dish_id: @dish_4.id, ingredient_id: @ingredient_11.id )
 
-      visit "/chefs/#{@chef_1.id}/ingredients"
+      visit "/chef/#{@chef_1.id}/ingredients"
     end
 
     it 'shows a list of all the ingredients the chef uses' do
 
-      expect(page).to have_content("#{@chef_1}'s Favorite Ingredients")
+      expect(page).to have_content("#{@chef_1.name}'s Favorite Ingredients")
 
       expect(page).to have_content(@ingredient_1.name)
       expect(page).to have_content(@ingredient_2.name)
@@ -60,10 +60,10 @@ RSpec.describe 'the chef ingredients index page: ', type: :feature do
       expect(page).to have_content(@ingredient_5.name)
       expect(page).to have_content(@ingredient_6.name)
       expect(page).to have_content(@ingredient_7.name)
-      expect(page).to have_content(@ingredient_8.name)
       expect(page).to have_content(@ingredient_11.name)
       expect(page).to have_content(@ingredient_12.name)
 
+      expect(page).to_not have_content(@ingredient_8.name)
       expect(page).to_not have_content(@ingredient_9.name)
       expect(page).to_not have_content(@ingredient_10.name)
     end

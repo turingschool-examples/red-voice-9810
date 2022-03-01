@@ -47,7 +47,7 @@ RSpec.describe 'the chef show page: ', type: :feature do
       DishIngredient.create(dish_id: @dish_3.id, ingredient_id: @ingredient_11.id )
       DishIngredient.create(dish_id: @dish_3.id, ingredient_id: @ingredient_12.id )
 
-      visit "/chefs/#{id}"
+      visit "/chefs/#{@chef_1.id}"
     end
 
     it 'has the chefs name' do
@@ -56,7 +56,7 @@ RSpec.describe 'the chef show page: ', type: :feature do
 
     it 'has a link to the chefs ingredients page' do
       click_on("Explore #{@chef_1.name}'s Ingredients")
-      expect(path).to eq "/chefs/#{@chef_1.id}/ingredients"
+      expect(current_path).to eq "/chef/#{@chef_1.id}/ingredients"
     end
   end
 end
