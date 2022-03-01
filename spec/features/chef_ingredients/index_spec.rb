@@ -1,20 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Dish, type: :model do
-  describe "validations" do
-    it {should validate_presence_of :name}
-    it {should validate_presence_of :description}
-  end
-  describe "relationships" do
-    it {should belong_to :chef}
-  end
-
+RSpec.describe 'Chef Ingredients Index Page' do
   before(:each) do
-    @gunnar = Chef.create!(name: "Gunnar")
     @sakic = Chef.create!(name: "Sakic")
 
-    @pasta = @gunnar.dishes.create!(name: "Pasta", description: "with cream sauce")
-    @roast = @gunnar.dishes.create!(name: "Pork Roast", description: "with rosemary")
+    @pasta = @sakic.dishes.create!(name: "Pasta", description: "with cream sauce")
+    @roast = @sakic.dishes.create!(name: "Pork Roast", description: "with rosemary")
 
     @noodles = Ingredient.create!(name: 'Noodles', calories: 300)
     @cheese = Ingredient.create!(name: 'Cheese', calories: 200)
@@ -28,10 +19,17 @@ RSpec.describe Dish, type: :model do
     @dish5 = DishIngredient.create!(dish_id: @roast.id, ingredient_id: @cheese.id )
     @dish6 = DishIngredient.create!(dish_id: @roast.id, ingredient_id: @pork.id )
   end
-  describe ".instance methods" do
-    describe '.total_calories' do
-      it 'counts all calories in dish' do
-        expect(@pasta.total_calories).to be(505)
+
+  describe 'When I visit a chefs ingredients index page' do
+    it 'displays all of the ingredients that chef uses' do
+      visit chef_ingredients_path(@sakic.id)
+      expect(current_path).to eq(chef_ingredients_path(@sakic.id))
+
+      within "div.ingredients" do
+        expect(page).to have_content(@noodles.name)
+        expect(page).to have_content(@cheese.name)
+        expect(page).to have_content(@pepper.name)
+        expect(page).to have_content(@pork.name)
       end
     end
   end
