@@ -7,4 +7,12 @@ class Dish <ApplicationRecord
   def list_ingredients
     ingredients.pluck(:name)
   end
+
+  def chef_name
+    chef.name
+  end
+
+  def calories_count
+    ingredients.sum('calories')
+  end
 end

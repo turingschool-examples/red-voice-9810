@@ -31,5 +31,42 @@ RSpec.describe Dish, type: :model do
       expect(dish_1.list_ingredients).to eq(expected)
 
     end
+
+    it 'displays chef name' do
+
+      chef = Chef.create(name: "Gaston Acurio")
+      dish_1 = chef.dishes.create(name: "Ceviche", description: "Entree")
+      dish_2 = chef.dishes.create(name: "Lomo Saltado", description: "Main dish")
+
+      salt = Ingredient.create(name: 'Salt', calories: 70)
+      pepper = Ingredient.create(name: 'Pepper', calories: 30)
+      potatoes = Ingredient.create(name: 'Potatoes', calories: 170)
+
+      IngredientDish.create(dish_id: dish_1.id, ingredient_id: salt.id)
+      IngredientDish.create(dish_id: dish_1.id, ingredient_id: pepper.id)
+      IngredientDish.create(dish_id: dish_2.id, ingredient_id: potatoes.id)
+
+      expected = "Gaston Acurio"
+
+      expect(dish_1.chef_name).to eq(expected)
   end
+
+  it 'can count calories' do
+      chef = Chef.create(name: "Gaston Acurio")
+      dish_1 = chef.dishes.create(name: "Ceviche", description: "Entree")
+      dish_2 = chef.dishes.create(name: "Lomo Saltado", description: "Main dish")
+
+      salt = Ingredient.create(name: 'Salt', calories: 70)
+      pepper = Ingredient.create(name: 'Pepper', calories: 30)
+      potatoes = Ingredient.create(name: 'Potatoes', calories: 170)
+
+      IngredientDish.create(dish_id: dish_1.id, ingredient_id: salt.id)
+      IngredientDish.create(dish_id: dish_1.id, ingredient_id: pepper.id)
+      IngredientDish.create(dish_id: dish_2.id, ingredient_id: potatoes.id)
+
+      expected = 100
+
+      expect(dish_1.calories_count).to eq(expected)
+    end
+end
 end
