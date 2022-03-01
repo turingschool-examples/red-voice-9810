@@ -9,6 +9,11 @@ class Dish <ApplicationRecord
   end
 
   def name_of_chef
+    # require "pry"; binding.pry
     chef.name
+  end
+
+  def total_calorie_count
+    ingredients.sum('calories')
   end
 end

@@ -8,23 +8,46 @@ require 'rails_helper'
 
 RSpec.describe 'dish show page' do
   it 'can see a list of ingredients for that dish' do
-  chef = Chef.create(name: "Gordon Ramsey")
-  dish_1 = chef.dishes.create(name: "Roasted beef", description: "hot dish")
-  dish_2 = chef.dishes.create(name: "Potatoe Salad", description: "cold dish")
+    chef = Chef.create(name: "Gordon Ramsey")
+    dish_1 = chef.dishes.create(name: "Roasted beef", description: "hot dish")
+    dish_2 = chef.dishes.create(name: "Potatoe Salad", description: "cold dish")
 
-  beef = Ingredient.create(name: 'Beef', calories: 300)
-  pepper = Ingredient.create(name: 'Pepper', calories: 30)
-  potatoes = Ingredient.create(name: 'Potatoes', calories: 170)
+    beef = Ingredient.create(name: 'Beef', calories: 300)
+    pepper = Ingredient.create(name: 'Pepper', calories: 30)
+    potatoes = Ingredient.create(name: 'Potatoes', calories: 170)
 
-  IngredientDish.create(dish_id: dish_1.id, ingredient_id: beef.id)
-  IngredientDish.create(dish_id: dish_1.id, ingredient_id: pepper.id)
-  IngredientDish.create(dish_id: dish_2.id, ingredient_id: potatoes.id)
+    IngredientDish.create(dish_id: dish_1.id, ingredient_id: beef.id)
+    IngredientDish.create(dish_id: dish_1.id, ingredient_id: pepper.id)
+    IngredientDish.create(dish_id: dish_2.id, ingredient_id: potatoes.id)
 
-  visit "/dishes/#{dish_1.id}"
+    visit "/dishes/#{dish_1.id}"
 
-  expect(page).to have_content(dish_1.name)
-  expect(page).to have_content(dish_1.description)
-  expect(page).to have_content(dish_1.list_of_ingredients)
-  expect(page).to have_content(dish_1.name_of_chef)
+    expect(page).to have_content(dish_1.name)
+    expect(page).to have_content(dish_1.description)
+    expect(page).to have_content(dish_1.list_of_ingredients)
+    expect(page).to have_content(dish_1.name_of_chef)
   end
+
+#   Story 2 of 3
+# As a visitor
+# When I visit a dish's show page
+# I see the total calorie count for that dish.
+  it 'can see the total calorie count for that dish' do
+    chef = Chef.create(name: "Gordon Ramsey")
+    dish_1 = chef.dishes.create(name: "Roasted beef", description: "hot dish")
+    dish_2 = chef.dishes.create(name: "Potatoe Salad", description: "cold dish")
+
+    beef = Ingredient.create(name: 'Beef', calories: 300)
+    pepper = Ingredient.create(name: 'Pepper', calories: 30)
+    potatoes = Ingredient.create(name: 'Potatoes', calories: 170)
+
+    IngredientDish.create(dish_id: dish_1.id, ingredient_id: beef.id)
+    IngredientDish.create(dish_id: dish_1.id, ingredient_id: pepper.id)
+    IngredientDish.create(dish_id: dish_2.id, ingredient_id: potatoes.id)
+
+    visit "/dishes/#{dish_1.id}"
+    
+    expect(page).to have_content(dish_1.total_calorie_count)
+  end
+
 end
