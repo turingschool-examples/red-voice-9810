@@ -3,7 +3,7 @@ class Chef < ApplicationRecord
   has_many :dishes
 
   def get_ingredients
-    self.dishes
+    dishes
     .joins(:ingredients)
     .select('ingredients.*')
     .distinct
