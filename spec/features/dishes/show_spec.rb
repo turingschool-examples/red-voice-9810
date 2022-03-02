@@ -28,7 +28,7 @@ RSpec.describe 'Dish Show page' do
     describe "will show a dish's attributes" do
     it 'will list' do
       visit dish_path(@chili.id)
-save_and_open_page
+
      expect(page).to have_content(@chili.name)
      expect(page).to have_content(@chili.description)
      expect(page).to have_content(@chef1.name)
