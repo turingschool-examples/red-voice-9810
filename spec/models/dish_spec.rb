@@ -7,5 +7,17 @@ RSpec.describe Dish, type: :model do
   end
   describe "relationships" do
     it {should belong_to :chef}
+    it { should have_many(:ingredients).through(:dish_ingredients) }
+  end
+
+  describe "class methods" do
+    it "::total_calories" do
+      chef = Chef.create!(name: "me")
+      dish = chef.dishes.create!(name: "Butter Soup", description: "This sounds terrible")
+      ing_1 = dish.ingredients.create!(name: "Butter", calories: 200)
+      ing_2 = dish.ingredients.create!(name: "Thyme", calories: 15)
+
+      expect(dish.total_calories).to eq(215)
+    end
   end
 end
