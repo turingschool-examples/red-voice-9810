@@ -1,15 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Dish, type: :model do
-  describe "validations" do
-    it {should validate_presence_of :name}
-    it {should validate_presence_of :description}
-  end
-  describe "relationships" do
-    it {should belong_to :chef}
-    it {should have_many (:dish_ingredients)}
-    it {should have_many(:ingredients).through(:dish_ingredients)}
-  end
+RSpec.describe 'Chef Show page' do
 
   before :each do
     @chef1 = Chef.create!(name: 'Cooker')
@@ -34,8 +25,19 @@ RSpec.describe Dish, type: :model do
 
   end
 
-  it 'will calculate the amount of calories a dsh has' do
+    describe "will show a chef's attributes" do
+    it 'will list' do
+      visit chef_path(@chef1.id)
 
-   expect(@chili.total_calories).to eq(66)
-  end
+    expect(page).to have_link("My unique ingredients")
+    click_link("My unique ingredients")
+
+    expect(page).to have_current_path(chef_ingredients_path(@chef1.id))
+
+      expect(page).to have_content(@sugar.name)
+      expect(page).to have_content(@apples.name)
+      expect(page).to have_content(@beans.name)
+      expect(page).to have_content(@bread.name)
+   end
+ end
 end
