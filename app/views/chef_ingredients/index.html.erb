@@ -1,0 +1,9 @@
+<h1>Unique Ingredients List:</h1>
+
+<h3>
+
+  <% @chef.get_ingredients.map do |ingredient| %>
+    <%= ingredient.name %> <br/><br/>
+  <% end %>
+
+</h3>
