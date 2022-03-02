@@ -14,7 +14,7 @@ RSpec.describe 'chef ingredients index' do
     @ingredient2 = @pizza.ingredients.create!(name: 'mozarella cheese', calories: 150)
     @ingredient3 = @pizza.ingredients.create!(name: 'pasta sauce', calories: 100)
     @ingredient4 = @risotto.ingredients.create!(name: 'risotto rice', calories: 150)
-    @ingredient5 = @lasagne.ingredients.create!(name: 'pasta sauce', calories: 100)
+    @ingredient5 = @pizza.ingredients.create!(name: 'pasta sauce', calories: 100)
     @ingredient6 = @burger.ingredients.create!(name: 'meat patty', calories: 150)
     
     visit chef_ingredients_path(@louis.id)

@@ -7,4 +7,8 @@ class Dish <ApplicationRecord
    def total_calories
     ingredients.sum(:calories)
    end 
+   
+   def unique_ingredient_name
+    ingredients.distinct.pluck(:name)
+   end
 end
