@@ -1,0 +1,6 @@
+<h1> Chef's Ingredients </h1>
+<% @dishes.each do |dish| %>
+  <% dish.ingredients.each do |ingredient| dish.unique_ingredient_name%>
+    <%= ingredient.name %>
+  <% end %>
+<% end %>
