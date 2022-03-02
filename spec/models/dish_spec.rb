@@ -18,7 +18,8 @@ RSpec.describe Dish, type: :model do
     @louis = Chef.create!(name: 'Chef Louis')
 
     @pizza = @louis.dishes.create!(name: 'Pizza', description: 'cheesy dough with sauce', chef_id: @louis)
-    
+    @lasagne = @louis.dishes.create!(name: 'Lasagne', description: 'cheesy pasta goodness', chef_id: @louis)
+
     @ingredient1 = @pizza.ingredients.create!(name: 'dough', calories: 200)
     @ingredient2 = @pizza.ingredients.create!(name: 'mozarella cheese', calories: 150)
     @ingredient3 = @pizza.ingredients.create!(name: 'pasta sauce', calories: 100)
@@ -26,6 +27,10 @@ RSpec.describe Dish, type: :model do
     
     it 'gives sum of total calories for a dish' do
       expect(@pizza.total_calories).to eq(450)
+    end
+
+    it 'returns only unique ingredient names' do
+      expect(@pizza.unique_ingredient_name).to eq([@ingredient1.name, @ingredient2.name])
     end
   end
 end
