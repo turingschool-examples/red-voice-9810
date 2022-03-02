@@ -1,15 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Chef, type: :model do
-  describe "validations" do
-    it {should validate_presence_of :name}
-  end
-  describe "relationships" do
-    it {should have_many :dishes}
-  end
-
-  describe 'instance methods' do
-    it 'shows the ingredient list' do
+RSpec.describe 'dish show page' do
+  describe 'User Story #1 and #2' do
+    before(:each) do
       @ramsay = Chef.create!(name: "Gordon Ramsay")
       # @michael = Chef.create!(name: "Michael")
 
@@ -25,9 +18,25 @@ RSpec.describe Chef, type: :model do
       DishIngredient.create!(dish: @wellington, ingredient: @ingredient_2)
       DishIngredient.create!(dish: @wellington, ingredient: @ingredient_3)
       DishIngredient.create!(dish: @wellington, ingredient: @ingredient_4)
-
-      expect(@ramsay.ingredient_list).to eq(["rosemary", "puff pastry", "filet tenderloin", "mushrooms"])
     end
 
+    it "shows the dish name, description, the list of ingredients and chef's name" do
+      visit "/dishes/#{@wellington.id}"
+
+      expect(page).to have_content(@wellington.name)
+      expect(page).to have_content(@wellington.description)
+      expect(page).to have_content(@ramsay.name)
+      expect(page).to have_content(@ingredient_1.name)
+      expect(page).to have_content(@ingredient_2.name)
+      expect(page).to have_content(@ingredient_3.name)
+      expect(page).to have_content(@ingredient_4.name)
+    end
+
+    it "shows the total calorie count for a specific dish" do
+      visit "/dishes/#{@wellington.id}"
+
+      expect(page).to have_content(@wellington.total_calorie_count)
+    end
   end
+
 end
